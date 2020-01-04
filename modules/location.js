@@ -13,15 +13,6 @@ function Location(locationData) {
 }
 
 
-function cacheLocation(city, data) {
-    const location = new Location(data[0]);
-    let newSql = `INSERT INTO location(search_query, latitude, longitude) VALUES ($1, $2, $3) RETURNING*`
-    let values = [city, location.latitude, location.longitude];
-    return client.query(newSql, values)
-        .then(result => result.rows[0]);
-}
-
-
 function getLocationData(city) {
     let sql = `SELECT * FROM location WHERE search_query = $1`;
     let queryData = [city];

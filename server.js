@@ -17,12 +17,12 @@ const server = express();
 server.use(cors());
 
 //////////// LOCATION /////////////
-server.get('/location', locationRndering);
+server.get('/location', locationhandler);
 
-function locationRndering(request, response) {
+function locationhandler(request, response) {
     let city = request.query.city;
     getLocationData(city)
-        .then(data => render(data, response))
+        .then(data => sendJson(data, response))
         .catch((error) => errorHandler(error, request, response));
 }
 
@@ -84,14 +84,14 @@ server.use('*', (request, response) => {
 server.use((error, request, response) => {
   response.status(500).send("Sorry, something went wrong");
 });
-function render(data, response) {
+function sendJson(data, response) {
     response.status(200).json(data)
 }
 function errorHandler(error, request, response){
   response.status(500).send(error)
 } 
 function startServer(){
-  server.listen(PORT, () => console.log('yap working'));
+  server.listen(PORT, () => console.log('YUP its working'));
 
 }
 client.connect()
