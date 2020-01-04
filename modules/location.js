@@ -10,6 +10,7 @@ function Location(locationData) {
     this.formatted_query = locationData.display_name;
     this.latitude = locationData.lat;
     this.longitude = locationData.lon;
+<<<<<<< HEAD
 }
 
 
@@ -19,6 +20,9 @@ function cacheLocation(city, data) {
     let values = [city, location.formatted_query, location.latitude, location.longitude];
     return client.query(newSql, values)
         .then(result => result.rows[0]);
+=======
+    
+>>>>>>> 072ccdffbfc2059dbfa633ad68164c695d055e32
 }
 
 
