@@ -15,8 +15,8 @@ function Location(locationData) {
 
 function cacheLocation(city, data) {
     const location = new Location(data[0]);
-    let newSql = `INSERT INTO location(search_query, latitude, longitude) VALUES ($1, $2, $3) RETURNING*`
-    let values = [city, location.latitude, location.longitude];
+    let newSql = `INSERT INTO location(search_query, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4) RETURNING*`
+    let values = [city, location.formatted_query, location.latitude, location.longitude];
     return client.query(newSql, values)
         .then(result => result.rows[0]);
 }
@@ -34,13 +34,4 @@ function getLocationData(city) {
                     .then(data => cacheLocation(city, data.body));
             }
         });
-}
-
-
-function cacheLocation(city, data) {
-    const location = new Location(data[0]);
-    let newSql = `INSERT INTO location(search_query, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4) RETURNING*`
-    let values = [city, location.display_query, location.latitude, location.longitude];
-    return client.query(newSql, values)
-        .then(result => result.rows[0]);
 }
